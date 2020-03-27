@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jwt.hibernate.Employee" table="empcrud">
+		<id name="id" type="integer" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="name" type="string" column="NAME" not-null="true" />
+		<property name="sal" type="integer" column="SAL" not-null="true" />
+		<property name="city" type="string" column="CITY" not-null="true" />
+		<property name="phone" type="integer" column="PHONE"
+			not-null="true" />
+	</class>
+</hibernate-mapping>
