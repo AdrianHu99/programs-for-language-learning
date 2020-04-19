@@ -1,0 +1,49 @@
+// Source : https://leetcode.com/problems/palindrome-linked-list/
+// Author : Qi Hu
+// Date   : 2016-03-07
+/**********************************************************************************
+ *
+ * Given a singly linked list, determine if it is a palindrome.
+ *
+ * Could you do it in O(n) time and O(1) space?
+ *
+ **********************************************************************************/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class PalindromeLinkedList {
+    public boolean isPalindrome(ListNode head) {
+        int n = 1;
+        if(head == null)return true;
+        else if(head.next == null)return false;
+        else{
+            ListNode a = head;
+            while(a.next != null){
+                a = a.next;
+                n++;
+            }
+            for(int aa = 1; aa <= n/2; aa++){
+                ListNode first = head;
+                ListNode last = head;
+                for(int j = 1; j < aa; j++){
+                    first = first.next;
+                }
+                for(int j = 0; j < n - aa; j++){
+                    last = last.next;
+                }
+                if(first.val == last.val){
+                    
+                }else{
+                    return false;
+                }
+            }
+            return true;
+            
+        }
+    }
+}
