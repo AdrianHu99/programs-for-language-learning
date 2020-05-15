@@ -1,4 +1,4 @@
-package com.qih.moviecatalogservice;
+package com.qih.moviecatalogservice.model;
 
 public class CatalogItem {
     private String name;
