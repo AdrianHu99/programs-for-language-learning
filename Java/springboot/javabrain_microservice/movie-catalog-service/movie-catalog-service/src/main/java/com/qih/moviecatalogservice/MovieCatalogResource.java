@@ -3,6 +3,7 @@ package com.qih.moviecatalogservice;
 import com.qih.moviecatalogservice.model.CatalogItem;
 import com.qih.moviecatalogservice.model.Movie;
 import com.qih.moviecatalogservice.model.Rating;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +19,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/catalog")
 public class MovieCatalogResource {
 
+    // 4. Make restTemplate a singleton, to save resource
+    @Autowired
+    private RestTemplate restTemplate;
+
     // 2. Make this mapping to certain request
     // 3. Get all rated movie IDs, for each movie ID, call movie info service to get details
     @RequestMapping("/{var1}")
     public List<CatalogItem> getCatalog(@PathVariable("var1") String userId) {
-
-        RestTemplate restTemplate = new RestTemplate();
 
         List<Rating> ratings = Arrays.asList(
                 new Rating("12", 5),
