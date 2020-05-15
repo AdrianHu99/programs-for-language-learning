@@ -3,6 +3,7 @@ package com.qih.moviecatalogservice;
 import com.qih.moviecatalogservice.model.CatalogItem;
 import com.qih.moviecatalogservice.model.Movie;
 import com.qih.moviecatalogservice.model.Rating;
+import com.qih.moviecatalogservice.model.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +26,12 @@ public class MovieCatalogResource {
 
     // 2. Make this mapping to certain request
     // 3. Get all rated movie IDs, for each movie ID, call movie info service to get details
-    @RequestMapping("/{var1}")
-    public List<CatalogItem> getCatalog(@PathVariable("var1") String userId) {
+    @RequestMapping("/{userId}")
+    public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
-        List<Rating> ratings = Arrays.asList(
-                new Rating("12", 5),
-                new Rating("13", 4)
-        );
+        UserRating ratings = restTemplate.getForObject("http://localhost:8083/ratingsdata/users/" + userId, UserRating.class);
 
-        return ratings.stream().map(rating -> {
+        return ratings.getRatings().stream().map(rating -> {
             Movie movie = restTemplate.getForObject("http://localhost:8082/movies/" + rating.getMovieId(), Movie.class);
             return new CatalogItem(movie.getName(), "TestDescription", rating.getRating());
         }).collect(Collectors.toList());
