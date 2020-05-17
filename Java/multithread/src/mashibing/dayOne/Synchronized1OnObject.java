@@ -1,4 +1,4 @@
-package mashibing.syncObject;
+package mashibing.dayOne;
 
 public class Synchronized1OnObject {
     private int count = 10;

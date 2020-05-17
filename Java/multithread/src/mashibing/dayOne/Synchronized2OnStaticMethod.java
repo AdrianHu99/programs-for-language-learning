@@ -1,4 +1,4 @@
-package mashibing.syncObject;
+package mashibing.dayOne;
 
 public class Synchronized2OnStaticMethod {
     private static int count = 10;

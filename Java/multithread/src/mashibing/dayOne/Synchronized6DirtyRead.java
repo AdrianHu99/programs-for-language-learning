@@ -1,6 +1,5 @@
-package mashibing.syncObject;
+package mashibing.dayOne;
 
-import javax.swing.plaf.synth.SynthDesktopIconUI;
 import java.util.concurrent.TimeUnit;
 
 public class Synchronized6DirtyRead {

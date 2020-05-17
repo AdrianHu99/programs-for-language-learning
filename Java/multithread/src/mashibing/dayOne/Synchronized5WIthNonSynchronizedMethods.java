@@ -1,4 +1,4 @@
-package mashibing.syncObject;
+package mashibing.dayOne;
 
 public class Synchronized5WIthNonSynchronizedMethods {
     public synchronized void m1() {

@@ -1,6 +1,4 @@
-package mashibing.syncObject;
-
-import jdk.swing.interop.SwingInterOpUtils;
+package mashibing.dayOne;
 
 import java.util.concurrent.TimeUnit;
 

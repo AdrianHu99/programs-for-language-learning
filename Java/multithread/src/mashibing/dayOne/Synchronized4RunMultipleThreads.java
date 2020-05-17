@@ -1,4 +1,4 @@
-package mashibing.syncObject;
+package mashibing.dayOne;
 
 public class Synchronized4RunMultipleThreads implements Runnable{
     private int count = 10;
