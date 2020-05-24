@@ -13,7 +13,7 @@ CAS is CPU level operation, which won't be interrupted
 One thing we can't prevent here is ABA problem (count was changed to 2 and then to 1 by other threads)
 To prevent that, add version number
 
-AtomicStampedReference
+AtomicStampedReference can resolve the problem above
  */
 public class T09CompareAndSwap {
     AtomicInteger count = new AtomicInteger(0);
