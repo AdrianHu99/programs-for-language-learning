@@ -20,8 +20,8 @@ public class RatingResource {
     @RequestMapping("/users/{userId}")
     public UserRating getUserRating(@PathVariable("userId") String userId) {
         List<Rating> ratings = Arrays.asList(
-                new Rating("12", 5),
-                new Rating("14", 6)
+                new Rating("104", 5),
+                new Rating("200", 6)
         );
         UserRating userRating = new UserRating();
         userRating.setRatings(ratings);
