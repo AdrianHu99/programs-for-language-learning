@@ -1,6 +1,7 @@
 package com.qih.moviecatalogservice;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.qih.moviecatalogservice.model.Rating;
 import com.qih.moviecatalogservice.model.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,16 @@ public class UserRatingInfo {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getFallbackUserRating")
+    @HystrixCommand(fallbackMethod = "getFallbackUserRating",
+            commandProperties = {
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowMilliseconds", value = "5000")
+            }
+    )
     public UserRating getUserRating(@PathVariable("userId") String userId) {
+
         return restTemplate.getForObject("http://movie-rating-service/ratingsdata/users/" + userId, UserRating.class);
     }
 
