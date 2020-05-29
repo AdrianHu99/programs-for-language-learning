@@ -1,5 +1,6 @@
 package com.qih.moviecatalogservice;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.qih.moviecatalogservice.model.CatalogItem;
 import com.qih.moviecatalogservice.model.Movie;
 import com.qih.moviecatalogservice.model.UserRating;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,7 @@ public class MovieCatalogResource {
     // 2. Make this mapping to certain request
     // 3. Get all rated movie IDs, for each movie ID, call movie info service to get details
     @RequestMapping("/{userId}")
+    @HystrixCommand(fallbackMethod = "getFallbackCatalog")
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
         UserRating ratings = restTemplate.getForObject("http://movie-rating-service/ratingsdata/users/" + userId, UserRating.class);
@@ -32,5 +35,9 @@ public class MovieCatalogResource {
             Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
             return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
         }).collect(Collectors.toList());
+    }
+
+    public List<CatalogItem> getFallbackCatalog(@PathVariable("userId") String userId) {
+        return Arrays.asList(new CatalogItem("No movie", "", 0));
     }
 }
