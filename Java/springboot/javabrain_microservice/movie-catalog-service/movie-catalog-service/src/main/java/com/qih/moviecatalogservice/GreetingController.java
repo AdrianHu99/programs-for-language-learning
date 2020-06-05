@@ -24,7 +24,7 @@ public class GreetingController {
 
     @GetMapping("/greetings")
     public String getGreetings() {
-        return dbSettings.getConnection() + dbSettings.getHost() + dbSettings.getPort();
+        return greeting + dbSettings.getConnection() + dbSettings.getHost() + dbSettings.getPort();
     }
 
 
