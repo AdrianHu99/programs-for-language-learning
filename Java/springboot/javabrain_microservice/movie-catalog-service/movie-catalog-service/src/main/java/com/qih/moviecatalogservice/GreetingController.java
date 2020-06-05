@@ -1,5 +1,6 @@
 package com.qih.moviecatalogservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +18,13 @@ public class GreetingController {
     @Value("${my.list.value}")
     private List<String> list;
 
-    @Value("#{${my.db.map}}")
-    private Map<String, String> map;
 
+    @Autowired
+    private DbSettings dbSettings;
 
     @GetMapping("/greetings")
     public String getGreetings() {
-        return greeting + list + map;
+        return dbSettings.getConnection() + dbSettings.getHost() + dbSettings.getPort();
     }
 
 
