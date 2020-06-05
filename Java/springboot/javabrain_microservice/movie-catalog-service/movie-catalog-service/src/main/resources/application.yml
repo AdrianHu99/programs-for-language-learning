@@ -1,6 +1,8 @@
 spring:
     application:
         name : movie-catalog-service
+    profiles:
+        active: dev
 
 server:
     port : 8081
@@ -15,4 +17,5 @@ db:
     connection : "{connection: 'http', username: 'abc', password: 'pwd'}"
     host : 127.0.0.1
     port : 3333
+
 
