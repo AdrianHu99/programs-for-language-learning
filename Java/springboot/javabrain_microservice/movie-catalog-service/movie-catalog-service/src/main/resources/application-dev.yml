@@ -4,15 +4,3 @@ spring:
 
 server:
   port : 8081
-
-my:
-  greetings : Hello from dev properties
-  list:
-    value : one,two,three
-
-
-db:
-  connection : "{connection: 'http', username: 'abc', password: 'pwd'}"
-  host : 127.0.0.1
-  port : 4444
-

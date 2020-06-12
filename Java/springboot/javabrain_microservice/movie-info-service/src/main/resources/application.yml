@@ -1,15 +1,16 @@
 spring:
     application:
-        name : movie-catalog-service
+        name : movie-info-service
 #    we won't use cloud config for now
 #    cloud:
 #        config:
 #            uri: http://localhost:8888
 
 server:
-    port : 8081
+    port : 8082
 
-
+api:
+    key: cea3b7a0b210db1ea9f3707365849dd8
 
 
 eureka:
