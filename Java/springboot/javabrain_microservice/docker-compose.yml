@@ -1,0 +1,59 @@
+version: '2'
+services:
+    discovery-center:
+        container_name: discovery-center
+        image: discovery-center:latest
+        expose:
+            - 8761
+        ports:
+            - 8761:8761
+        entrypoint: ["java","-jar","discovery-server-0.0.1-SNAPSHOT.jar"]
+        networks:
+            - spring-cloud-network
+        logging:
+            driver: json-file
+    movie-catalog:
+        container_name: movie-catalog-service
+        image: movie-catalog:latest
+        entrypoint: ["java","-jar","movie-catalog-service-0.0.1-SNAPSHOT.jar"]
+        expose:
+            - 8081
+        ports:
+            - 8081:8081
+        links:
+            - discovery-center
+        networks:
+            - spring-cloud-network
+        logging:
+            driver: json-file
+    movie-info:
+        container_name: movie-info-service
+        image: movie-info:latest
+        entrypoint: ["java","-jar","movie-info-service-0.0.1-SNAPSHOT.jar"]
+        expose:
+            - 8082
+        ports:
+            - 8082:8082
+        links:
+            - discovery-center
+        networks:
+            - spring-cloud-network
+        logging:
+            driver: json-file
+    movie-rating:
+        container_name: movie-rating-service
+        image: movie-rating:latest
+        entrypoint: ["java","-jar","movie-rating-service-0.0.1-SNAPSHOT.jar"]
+        expose:
+            - 8083
+        ports:
+            - 8083:8083
+        links:
+            - discovery-center
+        networks:
+            - spring-cloud-network
+        logging:
+            driver: json-file
+networks:
+    spring-cloud-network:
+        driver: bridge
