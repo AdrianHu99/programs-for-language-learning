@@ -22,9 +22,11 @@ func TestFibList(t *testing.T) {
 
 func TestExchange(t *testing.T) {
 	a := 1
-	b := 1
-	tmp := a
-	a = b
-	b = tmp
+	b := 2
+	t.Log(a, b)
+	// tmp := a
+	// a = b
+	// b = tmp
+	a, b = b, a
 	t.Log(a, b)
 }

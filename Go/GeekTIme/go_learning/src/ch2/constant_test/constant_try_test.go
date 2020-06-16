@@ -12,6 +12,16 @@ const (
 	Sunday
 )
 
+const (
+	Readable = 1 << iota
+	Writable
+	Executable
+)
+
 func TestConstantTry(t *testing.T) {
-	t.Log(Monday, Tuesday)
+	t.Log(Monday, Tuesday, Thursday, Sunday)
+}
+
+func TestConstantTry1(t *testing.T) {
+	t.Log(Readable, Writable, Executable)
 }

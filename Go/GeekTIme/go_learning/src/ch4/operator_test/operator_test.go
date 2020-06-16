@@ -19,6 +19,8 @@ func TestCompareArray(t *testing.T) {
 
 func TestBitClear(t *testing.T) {
 	a := 7
+	// Using &^, if right side is 1 at x bit, the left side x bit will be set to zero
+	// good for permission control
 	a = a &^ Readable
 	a = a &^ Executable
 	t.Log(a&Readable == Readable, a&Writable == Writable, a&Executable == Executable)
