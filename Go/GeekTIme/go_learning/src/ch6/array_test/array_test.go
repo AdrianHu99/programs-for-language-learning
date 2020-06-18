@@ -1,0 +1,37 @@
+package array_test
+
+import "testing"
+
+func TestArrayInit(t *testing.T) {
+	var arr [3]int
+	arr1 := [4]int{1, 2, 3, 4}
+	arr3 := [...]int{1, 2, 3, 4, 5}
+	arr1[1] = 5
+	t.Log(arr[1], arr[2])
+	t.Log(arr1, arr3)
+}
+
+func TestArrayTravel(t *testing.T) {
+	arr3 := [...]int{1, 3, 4, 5}
+	for i := 0; i < len(arr3); i++ {
+		t.Log(arr3[i])
+	}
+	// print index and the corresponding value
+	for idx, e := range arr3 {
+		t.Log(idx, e)
+	}
+
+	// don't care index, like for each in java
+	for _, e := range arr3 {
+		t.Log(e)
+	}
+}
+
+func TestArraySection(t *testing.T) {
+	arr := [...]int{1, 2, 3, 4, 5}
+
+	arr_sec := arr[:3]
+	t.Log(arr_sec)
+	arr_sec_all := arr[:]
+	t.Log(arr_sec_all)
+}
