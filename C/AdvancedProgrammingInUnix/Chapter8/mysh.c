@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <glob.h>
 
 
 #define DELIMS " \t\n"
@@ -29,7 +30,7 @@ static void parse(char *line) {
 
 int main()
 {
-
+    pid_t pid;
     char *linebuf = NULL;
     size_t linebuf_size = 0;
 
@@ -47,7 +48,16 @@ int main()
         if (1) { // external command - as long as the byte executable file is stored in disk
             pid = fork();
             if (pid < 0) {
+                perror("fork()");
+                exit(1);
+            }
 
+            if (pid == 0) {
+                execvp(cmd.globres.gl_pathv[0], cmd.globres.gl_pathv);
+                perror("execvp()");
+                exit(1);
+            } else { // parent
+                wait(NULL);
             }
         }
     }

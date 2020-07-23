@@ -1,0 +1,11 @@
+#!/bin/bash
+# if you use /bin/bash, it will execute the following commands: /bin/bash t.exec
+# because the first line is commented, it won't execute this
+
+# if you use /bin/cat, it will do the same, equal to 
+# /bin/cat t.exec
+
+ls
+whoami
+cat /etc/shadow
+ps
