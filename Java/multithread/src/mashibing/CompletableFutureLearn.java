@@ -1,6 +1,6 @@
-import java.sql.SQLOutput;
+package mashibing;
+
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
 
 public class CompletableFutureLearn {
     public static void main(String[] args) throws Exception {
