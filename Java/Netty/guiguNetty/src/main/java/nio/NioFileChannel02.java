@@ -9,8 +9,18 @@ import java.nio.charset.StandardCharsets;
 
 public class NioFileChannel02 {
     public static void main(String[] args) throws IOException {
-        try (FileInputStream fileInputStream = new FileInputStream("/home/qih/test.txt")) {
+        /*try (FileInputStream fileInputStream = new FileInputStream("/home/qih/test.txt")) {
             FileChannel fileChannel = fileInputStream.getChannel();
+
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+
+            fileChannel.read(byteBuffer);
+
+            System.out.println(new String(byteBuffer.array()));
+        }*/
+
+        try (FileInputStream inputStream = new FileInputStream("/Users/qihu/Downloads/test.txt")) {
+            FileChannel fileChannel= inputStream.getChannel();
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 
