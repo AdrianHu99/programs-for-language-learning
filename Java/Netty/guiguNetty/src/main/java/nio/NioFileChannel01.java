@@ -1,7 +1,5 @@
 package nio;
 
-import sun.tools.tree.ByteExpression;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -31,15 +29,15 @@ public class NioFileChannel01 {
 
         // Channel is inside the output stream
         try (FileOutputStream outputStream = new FileOutputStream("/Users/qihu/Downloads/test.txt")) {
-            FileChannel fileChannel = outputStream.getChannel();
+            try (FileChannel fileChannel = outputStream.getChannel()) {
+                ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+                byteBuffer.put(str.getBytes(StandardCharsets.UTF_8));
 
-            byteBuffer.put(str.getBytes(StandardCharsets.UTF_8));
+                byteBuffer.flip();
 
-            byteBuffer.flip();
-
-            fileChannel.write(byteBuffer);
+                fileChannel.write(byteBuffer);
+            }
         }
     }
 }

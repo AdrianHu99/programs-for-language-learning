@@ -1,11 +1,9 @@
 package nio;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.StandardCharsets;
 
 public class NioFileChannel02 {
     public static void main(String[] args) throws IOException {
@@ -20,13 +18,13 @@ public class NioFileChannel02 {
         }*/
 
         try (FileInputStream inputStream = new FileInputStream("/Users/qihu/Downloads/test.txt")) {
-            FileChannel fileChannel= inputStream.getChannel();
+            try (FileChannel fileChannel = inputStream.getChannel()) {
+                ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+                fileChannel.read(byteBuffer);
 
-            fileChannel.read(byteBuffer);
-
-            System.out.println(new String(byteBuffer.array()));
+                System.out.println(new String(byteBuffer.array()));
+            }
         }
 
     }
